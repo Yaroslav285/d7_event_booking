@@ -1,0 +1,74 @@
+{
+    "name": "mudriy/event_booking_system",
+    "description": "Drupal is an open source content management platform powering millions of websites and applications.",
+    "type": "project",
+    "license": "GPL-2.0+",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-gd": "*",
+        "ext-xml": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-curl": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "cweagans/composer-patches": "^1.6.0",
+        "hussainweb/drupal-composer-helper": "^1.0-beta3",
+        "drupal-composer/preserve-paths": "^0.1",
+        "drupal/drupal": "7.59.0",
+        "drupal/composer_autoloader": "^1.0",
+        "drush/drush": "~8.0",
+        "drupal/ctools":"^1.14",
+        "drupal/geolocation": "^1.7",
+        "drupal/entity": "^1.9",
+        "drupal/eck": "^2.0",
+        "drupal/views": "^3.20",
+        "drupal/features": "^2.10",
+        "drupal/features_extra":"^1.0",
+        "drupal/strongarm": "^2.0",
+        "drupal/date": "^2.10",
+        "drupal/nodequeue": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "Yaroslav",
+            "email": "Jaroslav2009@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "drupal-composer-helper": {
+            "web-prefix": "web",
+            "set-d7-paths": true
+        },
+        "enable-patching": true,
+        "installer-paths": {
+            "web/": [
+                "type:drupal-core"
+            ]
+        },
+        "preserve-paths": [
+            "web/sites/all/libraries",
+            "web/sites/all/modules/custom",
+            "web/sites/all/modules/features",
+            "web/sites/all/themes/custom",
+            "web/sites/all/translations",
+            "web/sites/default"
+        ]
+    },
+    "prefer-stable": true,
+    "conflict": {
+        "drupal/core": "8.*"
+    },
+    "config": {
+        "sort-packages": false,
+        "optimize-autoloader": true,
+        "bin-dir": "bin/"
+    }
+}
