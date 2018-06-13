@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbbf48afd13a7fa4e6f1a97cf1e2064d",
+    "content-hash": "ad945815c33d5874f573210f43060049",
     "packages": [
         {
             "name": "composer/installers",
@@ -1256,6 +1256,49 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/geolocation"
             }
+        },
+        {
+            "name": "drupal/geolocation_views",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/geolocation_views",
+                "reference": "352468c25688ef645313fc62f312d9d1de0974d7"
+            },
+            "require": {
+                "drupal/drupal": "~7.0",
+                "drupal/geolocation": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "7.x-1.x-dev",
+                    "datestamp": "1489658284",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/7/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "xandeadx",
+                    "homepage": "https://www.drupal.org/user/645760"
+                }
+            ],
+            "description": "Provides a Views style plugin for geolocation field.",
+            "homepage": "https://www.drupal.org/project/geolocation_views",
+            "support": {
+                "source": "http://cgit.drupalcode.org/geolocation_views"
+            },
+            "time": "2017-03-16T09:53:22+00:00"
         },
         {
             "name": "drupal/nodequeue",
@@ -2591,7 +2634,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "drupal/geolocation_views": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

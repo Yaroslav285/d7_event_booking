@@ -27,7 +27,8 @@
         "drupal/features_extra":"^1.0",
         "drupal/strongarm": "^2.0",
         "drupal/date": "^2.10",
-        "drupal/nodequeue": "^2.1"
+        "drupal/nodequeue": "^2.1",
+        "drupal/geolocation_views": "1.x-dev"
     },
     "authors": [
         {
