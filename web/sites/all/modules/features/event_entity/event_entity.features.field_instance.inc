@@ -141,13 +141,13 @@ function event_entity_field_default_field_instances() {
         'settings' => array(
           'map_height' => '300px',
           'map_imageformat' => 'png8',
-          'map_link' => 0,
           'map_maptype' => 'roadmap',
+          'map_scrollwheel' => FALSE,
           'map_width' => '300px',
           'map_zoomlevel' => 7,
           'marker_icon' => '',
         ),
-        'type' => 'geolocation_googlemaps_static',
+        'type' => 'geolocation_googlemaps_dynamic',
         'weight' => 3,
       ),
       'full' => array(
@@ -173,9 +173,9 @@ function event_entity_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'geolocation_googlemaps_d8',
+      'module' => 'geolocation_googlemaps',
       'settings' => array(),
-      'type' => 'geolocation_googlemap_d8',
+      'type' => 'geolocation_googlemap',
       'weight' => 4,
     ),
   );
