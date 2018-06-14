@@ -52,12 +52,14 @@ function latest_events_block_view() {
         ->range(0, 5);
   // Get query results.
   $result = $query->execute();
-  // Get events id without changing of order.
-  foreach($result['events'] as $event) {
-    $event_ids[] = $event->id;
+  if ($result !== NULL && !empty($result['events'])) {
+    // Get events id without changing of order.
+    foreach ($result['events'] as $event) {
+      $event_ids[] = $event->id;
+    }
+    // Load entities by ids.
+    $events = entity_load( 'events', $event_ids );
   }
-  // Load entities by ids.
-  $events = entity_load('events', $event_ids);
   // Creating wrapper for block.
   $latest_events_info = '<div class="latest_events">';
   // Get Google API key from site configuration.
