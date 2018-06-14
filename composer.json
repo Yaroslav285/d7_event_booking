@@ -30,7 +30,8 @@
         "drupal/nodequeue": "^2.1",
         "drupal/geolocation_views": "1.x-dev",
         "drupal/views_block_filter_block": "^1.0",
-        "drupal/better_exposed_filters":"^3.5"
+        "drupal/better_exposed_filters":"^3.5",
+        "drupal/entityreference": "^1.5"
     },
     "authors": [
         {
