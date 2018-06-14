@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function latest_events_block_block_info() {
+  $blocks = array();
+  $blocks['latest_events'] = array(
+    'info' => t('Latest events'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * @param string $delta
+ *
+ * @return array
+ * @throws EntityFieldQueryException
+ */
+function latest_events_block_block_view($delta='') {
+  $block = array();
+
+  switch($delta) {
+    case 'latest_events' :
+      $block['content'] = latest_events_block_view();
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Custom function to assemble render array for block content.
+ * Returns a render array with the block content.
+ * @return array
+ *    returns a render array of block content.
+ * @throws EntityFieldQueryException
+ */
+function latest_events_block_view() {
+  // Initialize variables.
+  $block = [];
+  $event_ids = [];
+  // Initialize entity Query.
+  $query = new EntityFieldQuery();
+  // Preparing query for getting 5 latest events by event date.
+  $query->entityCondition('entity_type', 'events', '=')
+        ->fieldCondition('field_date', 'value', 'NULL', '<>')
+        ->fieldOrderBy('field_date', 'value', 'DESC')
+        ->range(0, 5);
+  // Get query results.
+  $result = $query->execute();
+  // Get events id without changing of order.
+  foreach($result['events'] as $event) {
+    $event_ids[] = $event->id;
+  }
+  // Load entities by ids.
+  $events = entity_load('events', $event_ids);
+  // Creating wrapper for block.
+  $latest_events_info = '<div class="latest_events">';
+  // Get Google API key from site configuration.
+  $google_api_key = geolocation_googlemaps_admin_settings()['geolocation_googlemaps_api_key']['#default_value'];
+  // Preparing results for rendering.
+  if (!empty($events)) {
+    foreach ($events as $event_entity) {
+      // Getting and encoding event coordinates.
+      $google_query = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $event_entity->field_location["und"][0]["lat"] . ',' . $event_entity->field_location["und"][0]["lng"] . '&key=' . $google_api_key);
+      $encoded = json_decode($google_query);
+      if ($encoded->status === 'OK') {
+        $event_address = $encoded->results[0]->formatted_address;
+      }
+      else {
+        $event_address = 'Address not recognised';
+      }
+      // Build results markup.
+      $latest_events_info .=
+        '<div class="event_info">
+         <div id="event_title"><b>Title</b> ' . $event_entity->title . '</div>
+         <div id="event_description"><b>Description:</b> ' . substr($event_entity->field_description["und"][0]["value"], 0, 30) . '...</div>
+         <div id="event_date"><b>Date:</b> ' . date('d/m/Y H:i', $event_entity->field_date["und"][0]["value"]) . '</div>
+         <div id="event_address"><b>Address:</b> ' . $event_address . '</div>
+         <div id="event_places"><b>Places:</b> ' . $event_entity->field_places["und"][0]["value"] . '</div>
+         <div id="read_more"><a href="/' . $event_entity->uri()['path'] . '" >Read more &raquo;</a></div>
+         </div>
+         <hr>
+         <br>';
+    }
+  }
+  // Closing block wrapper.
+  $latest_events_info .= '</div>';
+
+  // Block output.
+  $block = [
+      'message' => [
+       '#type' => 'markup',
+       '#markup' => $latest_events_info,
+      ],
+    ];
+
+    return $block;
+  }
+
