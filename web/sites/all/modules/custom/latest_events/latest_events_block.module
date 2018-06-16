@@ -92,6 +92,8 @@ function latest_events_block_view() {
   }
   // Closing block wrapper.
   $latest_events_info .= '</div>';
+  // Attaching styles for latest events block.
+  drupal_add_css(drupal_get_path('module', 'latest_events_block') . '/css/latest_events.css');
 
   // Block output.
   $block = [

@@ -1,0 +1,7 @@
+<?php
+
+function geolocation_styles_preprocess_geolocation_views_map(&$variables) {
+  // Attaching styles for descriptions on map.
+  drupal_add_css(drupal_get_path('module', 'geolocation_styles') . '/css/map_styles.css');
+}
+

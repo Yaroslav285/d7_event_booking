@@ -1,0 +1,7 @@
+.block-latest-events-block hr {
+    height: 0;
+}
+
+.block-latest-events-block .event_info div {
+    padding: 3px 0;
+}

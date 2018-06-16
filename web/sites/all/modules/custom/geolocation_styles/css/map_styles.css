@@ -1,0 +1,20 @@
+.gm-style-iw div {
+    width: 150px;
+}
+
+.gm-style-iw .views-label-title,
+.gm-style-iw .views-label-field-date,
+.gm-style-iw .views-label-field-description,
+.gm-style-iw .views-label-field-places,
+.gm-style-iw .views-label-view-link {
+    font-weight: bold;
+}
+
+
+.gm-style-iw .views-field-title,
+.gm-style-iw .views-field-field-date,
+.gm-style-iw .views-field-field-description,
+.gm-style-iw .views-field-field-places,
+.gm-style-iw .views-field-view-link {
+    margin: 10px 0;
+}
