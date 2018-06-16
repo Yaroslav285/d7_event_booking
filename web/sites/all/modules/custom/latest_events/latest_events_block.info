@@ -1,9 +1,7 @@
-; $Id
 name = Latest events block
 description = Provides custom block which show 5 latest events
 core = 7.x
 package = Event Booking
-; Information added by Drupal.org packaging script on 2017-10-25
 version = "7.x-1.0"
 project = "latest_events_block"
 
