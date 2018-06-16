@@ -3,5 +3,5 @@ description = Provides custom block which show 5 latest events
 core = 7.x
 package = Event Booking
 version = "7.x-1.0"
-project = "latest_events_block"
+
 
