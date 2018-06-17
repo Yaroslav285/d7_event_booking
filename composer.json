@@ -31,7 +31,9 @@
         "drupal/geolocation_views": "1.x-dev",
         "drupal/views_block_filter_block": "^1.0",
         "drupal/better_exposed_filters":"^3.5",
-        "drupal/entityreference": "^1.5"
+        "drupal/entityreference": "^1.5",
+        "drupal/modal_forms": "^1.2",
+        "drupal/devel": "^1.6"
     },
     "authors": [
         {

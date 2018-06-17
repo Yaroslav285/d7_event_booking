@@ -22,5 +22,58 @@ function geolocation_styles_preprocess(&$variables, $hook) {
     }
     // Returns human-readable location string on event page.
     $variables["content"]["field_location"][0]["#markup"] = $event_address;
+    $variables['content']['field_webform_book_event'][0]['#markup'] = '<a class="button ctools-use-modal ctools-modal-modal-popup-medium" href="/modal_forms/nojs/webform/6">Book event now</a>';
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function geolocation_styles_form_webform_client_form_6_alter( &$form, &$form_state, $form_id ) {
+ // Get referrer to get event_id.
+ $referrer = $_SERVER["HTTP_REFERER"];
+ if (stristr($referrer, 'events')) {
+   $referrer_array = explode('/', $referrer);
+   $event_id = array_pop($referrer_array);
+   $form["submitted"]["selected_event"]["#default_value"] = $referrer;
+   $form['#event_id'] = $event_id;
+   $form['actions']['submit']['#submit'][] = 'book_event_now';
+ }
+}
+
+/**
+ * Custom form submit for booking events via modal form on event page.
+ *
+ * @param $form
+ *    Form variables array.
+ * @param $form_state
+ *   Form state variables array.
+ */
+function book_event_now(&$form, &$form_state) {
+  // Updating event places.
+  $event = array_pop(entity_load('events', [0 => $form['#event_id']]));
+  $event->field_places["und"][0]["value"] = $event->field_places["und"][0]["value"] - 1;
+  entity_save('events', $event);
+
+  // Load submission libraries.
+  module_load_include('inc', 'webform', 'webform.module');
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $node = $form["#node"];
+
+  // Preparing submission data array.
+  $data = $form_state["values"]["submitted"];
+  $data = _webform_client_form_submit_flatten($node, $data);
+  $data = webform_submission_data($node, $data);
+  // Preparing submission object.
+  $submission = (object) array(
+    'nid' => $node->nid,
+    'uid' => $node->uid,
+    'submitted' => REQUEST_TIME,
+    'remote_addr' => ip_address(),
+    'is_draft' => FALSE,
+    'data' => $data,
+  );
+
+  // Saving submission.
+  webform_submission_insert($node, $submission);
 }
