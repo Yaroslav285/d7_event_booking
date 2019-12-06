@@ -15,7 +15,7 @@
         "cweagans/composer-patches": "^1.6.0",
         "hussainweb/drupal-composer-helper": "^1.0-beta3",
         "drupal-composer/preserve-paths": "^0.1",
-        "drupal/drupal": "7.59.0",
+        "drupal/drupal": "^7.0",
         "drupal/composer_autoloader": "^1.0",
         "drush/drush": "~8.0",
         "drupal/ctools":"^1.14",
